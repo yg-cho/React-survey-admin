@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import produce from "immer";
 
 const initialState= {
   "id": 1,
@@ -51,8 +52,42 @@ export const surveySlice = createSlice({
     setTitle: (state, action) => {
       state.title = action.payload;
     },
+    addQuestions:  (state) => {
+      state.questions.push( {
+        title:'Untitled',
+        desc:'',
+        type:'text',
+        required: false,
+        options:{
+          max: 20,
+          placeholder: ''
+        }
+      })
+    },
+    moveUpQuestion: (state,action) => {
+      const index = action.payload;
+      if(index === 0) {
+        return
+      }
+        const temp = state.questions[index];
+        state.questions[index] = state.questions[index-1];
+        state.questions[index-1] = temp;
+    },
+    moveDownQuestion: (state,action) => {
+      const index = action.payload;
+      if(index === state.questions.length-1) {
+        return
+      }
+      const temp = state.questions[index];
+      state.questions[index] = state.questions[index+1];
+      state.questions[index+1] = temp;
+    },
+    deleteQuestion: (state,action) => {
+      state.questions.splice(action.payload,1)
+    }
+
   }
 })
 
-export const { setTitle } = surveySlice.actions;
+export const { setTitle, addQuestions, moveUpQuestion, moveDownQuestion, deleteQuestion } = surveySlice.actions;
 export default surveySlice.reducer;
