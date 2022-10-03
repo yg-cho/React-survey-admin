@@ -3,14 +3,14 @@ import styled from "styled-components";
 import {Button} from 'antd';
 import {DeleteOutlined, DownOutlined, UpOutlined} from '@ant-design/icons'
 
-const Card = ({title, desc, children, onUpButton, onDownButton, onDeleteButton}) => {
+const Card = ({title, desc, children, onUpButton, onDownButton, onDeleteButton, onClick, isSelected}) => {
   return (
-    <CardWrapper>
-      <Head>
+    <CardWrapper isSelected={isSelected}>
+      <Head onClick={onClick}>
         <Title>{title}</Title>
         <Desc>{desc}</Desc>
       </Head>
-      <Body>
+      <Body onClick={onClick}>
         {children}
       </Body>
       <ButtonGroupWrapper>
@@ -38,7 +38,7 @@ const ButtonGroup = styled.div`
   border-radius: 5px;
 `
 const CardWrapper = styled.div`
-  border: 1px solid #dddddd;
+  border: ${({isSelected}) => isSelected ? '3px solid blue' : '1px solid #dddddd'};
   width :300px;
   margin: 10px auto;
   background: #ffffff;

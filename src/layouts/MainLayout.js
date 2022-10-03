@@ -5,9 +5,9 @@ import {useMemo} from "react";
 const { Header, Content, Sider } = Layout;
 
 
-const MainLayout = ({ selectedKeys, children}) => {
+const MainLayout = ({ selectedKeys, children, padding = 45}) => {
   const contentStyle = useMemo(() => {
-    return {padding: 45};
+    return {padding};
   },[])
 
   return (

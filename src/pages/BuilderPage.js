@@ -1,15 +1,7 @@
 import MainLayout from "../layouts/MainLayout";
-import { Row, Col, Input } from 'antd';
+import { Row, Col } from 'antd';
 import PreviewSection from "../components/PreviewSection";
 import OptionSection from "../components/OptionSection";
-import {
-  setTitle,
-  addQuestions,
-  moveUpQuestion,
-  moveDownQuestion,
-  deleteQuestion,
-
-} from "../stores/survey/surveySlice";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 import {useEffect} from "react";
@@ -17,7 +9,6 @@ import fetchSurvey from "../service/fetchSurvey";
 import BuilderTitleInput from "../BuilderTitleInput";
 
 const BuilderPage = () => {
-  const survey = useSelector((state) => state.survey.data)
   const error = useSelector((state) => state.survey.error)
   const loading = useSelector((state) => state.survey.loading)
   const dispatch = useDispatch();
@@ -35,24 +26,17 @@ const BuilderPage = () => {
   }
 
   return (
-    <MainLayout selectedKeys={"builder"}>
-      <Row>
-        <Col flex={"auto"}>
+    <MainLayout selectedKeys={"builder"} padding={0}>
+      <Row style={{height: '100%'}}>
+        <Col flex={"auto"} style={{padding: 30}}>
           <BuilderTitleInput/>
-          {/*<Input*/}
-          {/*  placeholder={"설문 제목을 입력해주세요."}*/}
-          {/*  value={survey.title}*/}
-          {/*  onChange={(e) => {*/}
-          {/*   dispatch(setTitle(e.target.value));*/}
-          {/*  }}*/}
-          {/*/>*/}
-          <PreviewSection
-          />
+          <PreviewSection/>
         </Col>
         <Col flex={"350px"}><OptionSection/></Col>
       </Row>
     </MainLayout>
   )
 };
+
 
 export default BuilderPage;
