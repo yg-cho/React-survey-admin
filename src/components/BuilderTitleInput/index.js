@@ -1,5 +1,5 @@
 import React from 'react';
-import {setTitle} from "../stores/survey/surveySlice";
+import {setTitle} from "../../stores/survey/surveySlice";
 import {Input} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 

@@ -64,9 +64,22 @@ export const surveySlice = createSlice({
     },
     setError: (state, action) => {
       state.error = action.payload;
+    },
+    setQuestion: (state, action) => {
+      const index = action.payload.index;
+      state.data.questions[index] = action.payload.data;
+
+      /* action ex
+        action.payload = {
+          index: 2,
+          data: {
+            ...
+          }
+        }
+       */
     }
   }
 })
 
-export const { setTitle, addQuestions, moveUpQuestion, moveDownQuestion, deleteQuestion, setSurvey, setLoading, setError } = surveySlice.actions;
+export const { setTitle, addQuestions, moveUpQuestion, moveDownQuestion, deleteQuestion, setSurvey, setLoading, setError, setQuestion } = surveySlice.actions;
 export default surveySlice.reducer;

@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 import {useEffect} from "react";
 import fetchSurvey from "../service/fetchSurvey";
-import BuilderTitleInput from "../BuilderTitleInput";
+import BuilderTitleInput from "../components/BuilderTitleInput";
 
 const BuilderPage = () => {
   const error = useSelector((state) => state.survey.error)

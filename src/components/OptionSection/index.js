@@ -1,35 +1,70 @@
 import styled from "styled-components";
-import {useSelector} from "react-redux";
-import {Form, Input} from "antd";
+import {useDispatch, useSelector} from "react-redux";
+import {Button, Form, Input} from "antd";
+import {useEffect} from "react";
+import { setQuestion } from "../../stores/survey/surveySlice";
 
 const {Item} = Form;
 
 const OptionSection = () => {
+  const dispatch = useDispatch();
   const questions = useSelector((state) =>
     state.selectedQuestionId.data === null
       ? null
       : state.survey.data.questions[state.selectedQuestionId.data]
   )
+  const [form] = Form.useForm();
+  console.log(questions)
+
+  const selectedQuestionId = useSelector(
+    (state) => state.selectedQuestionId.data,
+    );
+
+  useEffect(() => {
+    if(!questions) return;
+    form.setFieldsValue({
+      title: questions.title,
+      desc: questions.desc
+    })
+  },[form, questions])
 
 
   return (
     <OptionSectionWrapper>
       <Title>문항 옵션</Title>
-      {/*{questions? <></> : "질문을 선택해주세요."}*/}
-    <FormWrapper>
-      <Form
-        name={"option-form"}
-        layout={"vertical"}
+      <FormWrapper>
+      {questions ?
+        <Form
+          form={form}
+          name={"option-form"}
+          layout={"vertical"}
         >
         <SubTitle>공통옵션</SubTitle>
         <Item
           label={"질문"} name={"title"} rules={[{ required: true}]}>
           <Input/>
         </Item>
-        <Item label={"설명"} name={"subtitle"} rules={[{ required: true}]}>
+        <Item
+          label={"설명"} name={"desc"} rules={[{ required: true}]}>
           <Input/>
         </Item>
+        <Item>
+          <Button
+            type={"primary"}
+            onClick={() => {
+              const values = form.getFieldValue();
+              console.log("vaL :",values);
+              dispatch(setQuestion({index: selectedQuestionId, data: values}))
+            }
+          }
+          >적용
+          </Button>
+        </Item>
       </Form>
+        : "질문을 선택해주세요."
+      }
+
+
     </FormWrapper>
     </OptionSectionWrapper>
   );
