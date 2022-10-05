@@ -8,7 +8,7 @@ const { Header, Content, Sider } = Layout;
 const MainLayout = ({ selectedKeys, children, padding = 45}) => {
   const contentStyle = useMemo(() => {
     return {padding};
-  },[])
+  },[padding])
 
   return (
     <Layout

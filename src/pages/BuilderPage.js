@@ -1,5 +1,5 @@
 import MainLayout from "../layouts/MainLayout";
-import { Row, Col } from 'antd';
+import {Row, Col} from 'antd';
 import PreviewSection from "../components/PreviewSection";
 import OptionSection from "../components/OptionSection";
 import {useDispatch, useSelector} from "react-redux";
@@ -7,6 +7,7 @@ import {useParams} from "react-router-dom";
 import {useEffect} from "react";
 import fetchSurvey from "../service/fetchSurvey";
 import BuilderTitleInput from "../components/BuilderTitleInput";
+import FloatingButton from "../components/FloatingButton";
 
 const BuilderPage = () => {
   const error = useSelector((state) => state.survey.error)
@@ -34,6 +35,7 @@ const BuilderPage = () => {
         </Col>
         <Col flex={"350px"}><OptionSection/></Col>
       </Row>
+      <FloatingButton/>
     </MainLayout>
   )
 };
