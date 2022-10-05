@@ -6,6 +6,7 @@ const initialState = {
   error: null
 };
 
+
 export const surveySlice = createSlice({
   name: 'survey',
   initialState,
